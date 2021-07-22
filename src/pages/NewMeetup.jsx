@@ -1,9 +1,28 @@
+import { useHistory } from "react-router"
+
 import NewMeetupForm from "../components/meetups/NewMeetupForm"
 function NewMeetupPage() {
+  const history = useHistory()
+
+  const addMeetupHandler = (meetupdata) => {
+    // TODO: implementar um backend simples para brincar com database... deixar ele ouvindo na port 5050
+    fetch('https://zeta-essence-306423-default-rtdb.firebaseio.com/meetups.json', //O .json no final eh PARAMOUNT para evitar erros CORS
+      {
+        method: "POST",
+        body: JSON.stringify(meetupdata), //convertendo para JSON
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    ) //FIXME: poderia usar axios também...
+    .then(() => {
+      history.replace('/')
+    })
+  }
   return (
     <section>
       <h1>Add New Meetup</h1>
-      <NewMeetupForm />
+      <NewMeetupForm onAddMeetup={addMeetupHandler} />
     </section>)
 }
 
