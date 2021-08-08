@@ -6,7 +6,7 @@ function NewMeetupPage() {
 
   const addMeetupHandler = (meetupdata) => {
     // TODO: implementar um backend simples para brincar com database... deixar ele ouvindo na port 5050
-    fetch('https://zeta-essence-306423-default-rtdb.firebaseio.com/meetups.json', //O .json no final eh PARAMOUNT para evitar erros CORS
+    fetch(process.env.FIREBASE_URL, //O .json no final eh PARAMOUNT para evitar erros CORS
       {
         method: "POST",
         body: JSON.stringify(meetupdata), //convertendo para JSON

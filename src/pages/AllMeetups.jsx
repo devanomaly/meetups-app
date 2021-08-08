@@ -6,7 +6,7 @@ function AllMeetupsPage() {
   //useEffect => resolve o problema de fetching data!
   useEffect( _ => {
     setIsLoading(true)
-    fetch("https://zeta-essence-306423-default-rtdb.firebaseio.com/meetups.json")
+    fetch(process.env.FIREBASE_URL)
     .then(response => response.json())
     .then(data => {
       let meetups = []
